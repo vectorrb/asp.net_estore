@@ -1,0 +1,7 @@
+﻿""
+next workflow -
+- create a page for registration
+- implement change password fuctionality
+- captcha while registering/login
+- order controller
+- if possible payment gateway

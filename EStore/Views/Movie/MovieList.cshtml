@@ -1,0 +1,64 @@
+﻿@model EStore.Models.DTO.MovieListVM
+@{
+
+}
+
+<div class="tbl-container">
+	<h2>Movies</h2>
+	<section class="search-bar">
+	<form method="get" asp-action="MovieList">
+		<input type="text" name="term" placeholder="search here">
+		<button type="submit"><i class="fa fa-search"></i></button>
+		<a class="btn btn-default" href="/Movie/MovieList">All</a>
+	</form>
+	</section>
+
+	<table>
+		<tr>
+			<th>Title</th>
+			<th>Genre</th>
+			<th>Image</th>
+			<th>Release Year</th>
+			<th>Cast</th>
+			<th>Director</th>
+			<th>Action</th>
+
+
+		</tr>
+		@foreach (EStore.Models.Domain.Movie item in Model.MovieList)
+		{
+			<tr>
+				<td>@item.Title</td>
+				<td>@item.GenreNames</td>
+				<td><img style="height: 80px; width: 60px" src="/Uploads/@item.MovieImage" /></td>
+				<td>@item.ReleaseYear</td>
+				<td>@item.Cast</td>
+				<td>@item.Director</td>
+				<td>
+					<a href="/Movie/Edit?id=@item.Id" class="btn btn-info"><i class="bi bi-pencil-fill"></i> Edit</a>
+					<a href="/Movie/Delete?id=@item.Id" onclick="return window.confirm('Are you sure?')"
+				   class="btn btn-danger"><i class="bi bi-trash-fill"></i> Delete</a>
+				</td>
+			</tr>
+		}
+	</table>
+	<div class="input-container">
+		<a href="/Movie/Add" class="btn btn-sec">Back</a>
+	</div>
+</div>
+
+<div class="pagination">
+	@for(int i = 1; i <= Model.TotalPages; i++)
+	{
+		if(i == Model.CurrentPage)
+		{
+			<a href="/Movie/MovieList?currentPage=@i&term=@Model.Term" class="active">@i</a>
+
+		}
+		else
+		{
+			<a href="/Movie/MovieList?currentPage=@i&term=@Model.Term">@i</a>
+		}
+	}
+
+</div>

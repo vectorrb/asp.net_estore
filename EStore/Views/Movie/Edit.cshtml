@@ -1,0 +1,115 @@
+﻿@model EStore.Models.Domain.Movie
+@{
+
+}
+
+
+@Html.ValidationSummary()
+<form class="w-40" method="post" asp-action="Edit" enctype="multipart/form-data">
+	<h2 class="pb-10">Update Movie</h2>
+	<input type="hidden" class="input" asp-for="Id">
+
+	<div class="input-container">
+		<label asp-for="Title" class="w-40">Movie Name</label>
+		<input type="text" asp-for="Title" class="form-control">
+	</div>
+	<div class="pd-x-28 ">
+		<span asp-validation-for="Title" class="text-danger"></span>
+	</div>
+	<input type="hidden" class="input" asp-for="MovieImage">
+
+	<div class="input-container">
+		<label asp-for="ImageFile" class="w-40">Movie Image</label>
+		<input asp-for="ImageFile" class="form-control">
+	</div>
+	<div class="pd-x-28 ">
+		<span asp-validation-for="ImageFile" class="text-danger"></span>
+	</div>
+
+	<div class="form-group row">
+		<label class="control-label col-5">Select Genre</label>
+		<select asp-for="Genres" class="form-control col-5 d-inline" asp-items="@Model.GenreList" multiple
+				style="opacity: 0;">
+		</select>
+	</div>
+	<div class="pd-x-28 ">
+		<span asp-validation-for="Genres" class="text-danger"></span>
+	</div>
+
+	<div class="input-container">
+		<label asp-for="ReleaseYear" class="w-40">Released Year</label>
+		<input asp-for="ReleaseYear" class="form-control">
+	</div>
+	<div class="pd-x-28 ">
+		<span asp-validation-for="ReleaseYear" class="text-danger"></span>
+	</div>
+
+	<div class="input-container">
+		<label asp-for="Cast" class="w-40"></label>
+		<input asp-for="Cast" class="form-control">
+	</div>
+	<div class="pd-x-28 ">
+		<span asp-validation-for="Cast" class="text-danger"></span>
+	</div>
+
+	<div class="input-container">
+		<label asp-for="Director" class="w-40"></label>
+		<input asp-for="Director" class="form-control">
+	</div>
+	<div class="pd-x-28 ">
+		<span asp-validation-for="Director" class="text-danger"></span>
+	</div>
+
+
+
+
+	@if (TempData["msg"] != null)
+	{
+		<div class="alert mb-1">
+			@TempData["msg"]
+		</div>
+	}
+
+	<div class="input-container">
+		<button class="btn btn-default" type="submit">Update</button>
+		<a class="btn btn-sec" href="/Movie/MovieList">All records</a>
+	</div>
+</form>
+
+
+@{
+	List<string> checkedItemsValue = new List<string>();
+	foreach (var item in Model.GenreList)
+	{
+		checkedItemsValue.Add(item.Value);
+	}
+}
+<script type="text/javascript">
+	$(function () {
+		$('#Genres').multiselect({
+			includeSelectAllOption: true
+		});
+	});
+
+
+	const arrayValues = [];
+	//var length = @checkedItemsValue.Count;
+
+	arrayValues.push("@checkedItemsValue[0]")
+	arrayValues.push("@checkedItemsValue[1]")
+
+	$(document).ready(function() {
+		number i = 0;
+		HTMLElement elm = document.getElementById('check-genre');
+		while (arrayValues.length > i) {
+			var val = arrayValues[i];
+			$('input[value="' + val + '"]').click();
+			i++;
+		}
+	});
+</script>
+@section Scripts {
+    @{
+	await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

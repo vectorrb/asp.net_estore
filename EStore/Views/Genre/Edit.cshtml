@@ -1,0 +1,35 @@
+﻿@model EStore.Models.Domain.Genre
+@{
+
+}
+
+<form class="w-40" method="post" asp-action="Edit">
+	<h2 class="pb-10">Update Genre</h2>
+	<input type="hidden" class="input" asp-for="Id" />
+	<div class="input-container">
+		<label asp-for="GenreName" class="w-40">Genre Name</label>
+		<input asp-for="GenreName" class="form-control">
+	</div>
+	<div class="pd-x-28 ">
+		<span asp-validation-for="GenreName" class="text-danger"></span>
+	</div>
+	@if (TempData["msg"] != null)
+	{
+		<div class="alert mb-1">
+			@TempData["msg"]
+		</div>
+	}
+
+	<div class="input-container">
+		<button class="btn btn-default" type="submit">Update</button>
+		<a class="btn btn-sec" href="/Genre/GenreList">All records</a>
+	</div>
+</form>
+@section Scripts {
+    @{
+	await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	@*
+		<partial name="_ValidationScriptsPartial" />
+	*@
+}
+}

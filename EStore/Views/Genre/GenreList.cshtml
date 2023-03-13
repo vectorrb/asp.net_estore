@@ -1,0 +1,29 @@
+﻿@model IEnumerable<EStore.Models.Domain.Genre>
+@{
+
+}
+
+<div class="tbl-container">
+	<h2>Movies</h2>
+
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Action</th>
+		</tr>
+		@foreach(var item in Model){
+		<tr>
+			<td>@item.GenreName</td>
+			<td>
+				<a href="/Genre/Edit?id=@item.Id" class="btn btn-info"><i class="bi bi-pencil-fill"></i> Edit</a>
+				<a href="/Genre/Delete?id=@item.Id" onclick="return window.confirm('Are you sure?')"
+				class="btn btn-danger"><i class="bi bi-trash-fill"></i> Delete</a>
+			</td>
+		</tr>
+		}
+	</table>
+	<div class="input-container">
+		<a href="/Genre/Add" class="btn btn-sec">Back</a>
+	</div>
+</div>
+
