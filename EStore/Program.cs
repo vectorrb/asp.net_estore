@@ -3,8 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using EStore.Models.Domain;
 using EStore.Repositories.Abstract;
 using EStore.Repositories.Implementation;
-using EStore.Repositories.Abstract;
-using EStore.Repositories.Implementation;
+
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
